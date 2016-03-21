@@ -690,10 +690,10 @@ interests.display();
 
 $('a#link').click(function() {
 	$('tr#area1').css('display', 'none');
-    $('tr#area2').css('display', 'none');
-    $('tr#area3').css('display', 'none');
-    $('tr#area4').css('display', 'none');
-    $('tr#area5').css('display', 'none');
+	$('tr#area2').css('display', 'none');
+	$('tr#area3').css('display', 'none');
+	$('tr#area4').css('display', 'none');
+	$('tr#area5').css('display', 'none');
     $("a[id=link]").text('+');
     var href = $(this).attr('href');
     $(href).css('display', 'block');
