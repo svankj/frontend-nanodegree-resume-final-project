@@ -8,9 +8,9 @@ var bio = {
 	"contacts" : {
 		"mobile" : "001-445-9540",
 		"email" : "max.schreck@gmail.com",
-        "github" : "maxsk",
-        "twitter" : "#maxsk",
-        "location" : "Berlin"
+		"github" : "maxsk",
+		"twitter" : "#maxsk",
+		"location" : "Berlin"
 	},
 	"street" : "Strassen",
 	"number" : "4",
