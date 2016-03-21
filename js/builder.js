@@ -1,4 +1,5 @@
 /************* builder header menu********************/
+'use strict';
 
 var keyword = {
 	"me" : "Me",
@@ -9,7 +10,7 @@ var keyword = {
 	"languages" : "Languages",
 	"interests" : "Interests",
 	"contact" : "Contact"
-}
+};
 
 var footer = {
 	"mobile": "001-445-9540",
@@ -17,7 +18,7 @@ var footer = {
 	"github" : "maxsk",
 	"twitter" : "#maxsk",
 	"location" : "London"
-}
+};
 
 var HTMLkeywordMe = '<li class="active" id="menu"><a href="#">%data%</a></li>';
 var HTMLkeywordEducation = '<li class="" id="menu"><a href="#">%data%</a></li>';
@@ -39,7 +40,7 @@ keyword.display = function() {
 	var formattedInterests = HTMLkeywordInterests.replace("%data%", keyword.interests);
 	var formattedContact = HTMLkeywordContact.replace("%data%", keyword.contact);
 	$("#keyword-nav-dx").append(formattedProjects+formattedLanguages+formattedInterests+formattedContact);
-}
+};
 
 keyword.display();
 
@@ -56,6 +57,6 @@ footer.display = function() {
 	var formattedTwitter = HTMLtwitter.replace("%data%", footer.twitter);
 	var formattedLocation = HTMLlocation.replace("%data%", footer.location);
 	$("#footer-contacts").append(formattedMobile+formattedEmail+formattedGithub+formattedTwitter+formattedLocation);
-}
+};
 
 footer.display();
