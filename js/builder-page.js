@@ -568,8 +568,8 @@ languages.display = function() {
 	$(".box-1-3l").append(HTMLlanguagesSubTitle.replace("%data%", languages.subtitle[1]));
 	$(".box-1-4l").append(HTMLlanguagesSubTitle.replace("%data%", languages.subtitle[2]));
 	$(".box-1-2l").append(HTMLlanguagesTableThead);
-    $(".box-1-3l").append(HTMLlanguagesTableThead);
-    $(".box-1-4l").append(HTMLlanguagesTableThead);
+	$(".box-1-3l").append(HTMLlanguagesTableThead);
+	$(".box-1-4l").append(HTMLlanguagesTableThead);
 	$(".box-1-2l #theadid").append(HTMLlanguagesTableTr);
 	$(".box-1-3l #theadid").append(HTMLlanguagesTableTr);
 	$(".box-1-4l #theadid").append(HTMLlanguagesTableTr);
@@ -657,7 +657,7 @@ var HTMLinterestsTd2 = '<td>%data%</td>';
 interests.display = function() {
 	$(".box-1-1i").append(HTMLinterestsTitle.replace("%data%", interests.title));
 	$(".box-1-2i").append(HTMLinterestsTableThead);
-    $(".box-1-4i").append(HTMLinterestsTableThead);
+	$(".box-1-4i").append(HTMLinterestsTableThead);
 	$(".box-1-2i #theadid").append(HTMLinterestsTableTr);
 	$(".box-1-4i #theadid").append(HTMLinterestsTableTr);
 	var formattedTH = HTMLinterestsTh0.replace("%data%", interests.theadthTAB1[0]);
