@@ -1,21 +1,30 @@
 /******************************** builder pages **************************************************/
+'use strict';
 
 /**************************** me page *****************************************/
-var me = {
+var bio = {
 	"name" : "Max Schreck",
-	"job" : "Developer",
-	"location" : "Berlin",
+	"role" : "Developer",
+	"contacts" : {
+		"mobile" : "001-445-9540",
+		"email" : "max.schreck@gmail.com",
+        "github" : "maxsk",
+        "twitter" : "#maxsk",
+        "location" : "Berlin"
+	},
 	"street" : "Strassen",
 	"number" : "4",
 	"nationality" : "Germany",
 	"age" : "35",
 	"sex" : "Male",
-	"welcomemessage" : "What we see and what we seem are but a dream, a dream within a dream.",
+	"welcomeMessage" : "What we see and what we seem are but a dream, a dream within a dream.",
 	"description" : "I would like to acquire a challenging position in a dynamic environment "+
 	"in the web or mobile development for a software house where I am able to leverage the experience and skills "+
 	"I have obtained in 5 years of creative problem solving, project management, innovative thinking "+
-	"and maintaining client relations."
-}
+	"and maintaining client relations.",
+	"skills" : ["C++", "Java", "Php", "JS", "Oracle", "Android", "MVC"],
+	"biopic" : "../images/my-pict.jpg"
+};
 
 var HTMLkeywordName = '<li><span id="nameId">Name </span><span id="dataId">%data%</span></li>';
 var HTMLkeywordJob = '<li><span id="nameId">Job </span><span id="dataId">%data%</span></li>';
@@ -25,26 +34,45 @@ var HTMLkeywordNumber = '%data%</span></li>';
 var HTMLkeywordNationality = '<li><span id="nameId">From </span><span id="dataId">%data%</span></li>';
 var HTMLkeywordAge = '<li><span id="nameId">Age </span><span id="dataId">%data%</span></li>';
 var HTMLkeywordSex = '<li><span id="nameId">Sex </span><span id="dataId">%data%</span></li>';
+var HTMLkeywordMobile = '<li><span id="nameId">Mobile </span><span id="dataId">%data%</span></li>';
+var HTMLkeywordEmail = '<li><span id="nameId">@ </span><span id="dataId">%data%</span></li>';
+var HTMLkeywordGitHub = '<li><span id="nameId">gitHub </span><span id="dataId">%data%</span></li>';
+var HTMLkeywordTwitter = '<li><span id="nameId">Twitter </span><span id="dataId">%data%</span></li>';
+var HTMLkeywordSkills = '<li><span id="nameId">Skills </span><span id="dataId">%data%</span></li>';
 var HTMLkeywordWelcomeMessage = '<p class="morph"><q>%data%</q></p>';
 var HTMLkeywordDescription = '<p class="morph">%data%</p>';
+var HTMLkeywordBiopic = '<img id="myimm" src="%data%" alt="My phicture">';
 
-me.display = function() {
-	var formattedName = HTMLkeywordName.replace("%data%", me.name);
-	var formattedJob = HTMLkeywordJob.replace("%data%", me.job);
-	var formattedLocation = HTMLkeywordLocation.replace("%data%", me.location);
-	var formattedStreet = HTMLkeywordStreet.replace("%data%", me.street);
-	var formattedNumber = HTMLkeywordNumber.replace("%data%", me.number);
-	var formattedNationality = HTMLkeywordNationality.replace("%data%", me.nationality);
-	var formattedAge = HTMLkeywordAge.replace("%data%", me.age);
-	var formattedSex = HTMLkeywordSex.replace("%data%", me.sex);
+bio.display = function() {
+	var formattedName = HTMLkeywordName.replace("%data%", bio.name);
+	var formattedJob = HTMLkeywordJob.replace("%data%", bio.role);
+	var formattedLocation = HTMLkeywordLocation.replace("%data%", bio.contacts.location);
+	var formattedStreet = HTMLkeywordStreet.replace("%data%", bio.street);
+	var formattedNumber = HTMLkeywordNumber.replace("%data%", bio.number);
+	var formattedNationality = HTMLkeywordNationality.replace("%data%", bio.nationality);
+	var formattedAge = HTMLkeywordAge.replace("%data%", bio.age);
+	var formattedSex = HTMLkeywordSex.replace("%data%", bio.sex);
+	var formattedMobile = HTMLkeywordMobile.replace("%data%", bio.contacts.mobile);
+	var formattedEmail = HTMLkeywordEmail.replace("%data%", bio.contacts.email);
+	var formattedGitHub = HTMLkeywordGitHub.replace("%data%", bio.contacts.github);
+	var formattedTwitter = HTMLkeywordTwitter.replace("%data%", bio.contacts.twitter);
+	$(".sub-box-1a").append(HTMLkeywordBiopic.replace("%data%", bio.biopic));
+	var formattedSkillsTmp="";
+	for(var i=0; i<bio.skills.length; i++) {
+		if(bio.skills[i] !== null)
+			if(i === bio.skills.length-1) formattedSkillsTmp += bio.skills[i];
+				else formattedSkillsTmp += bio.skills[i]+", ";
+	}
+	var formattedSkills = HTMLkeywordSkills.replace("%data%", formattedSkillsTmp);
 	$("#me-list").append(formattedName+formattedJob+formattedLocation+formattedStreet+formattedNumber
-		+formattedNationality+formattedAge+formattedSex);
-	var formattedWelcomeMessage = HTMLkeywordWelcomeMessage.replace("%data%", me.welcomemessage);
-	var formattedDescription = HTMLkeywordDescription.replace("%data%", me.description);
+		+formattedNationality+formattedAge+formattedSex+formattedMobile+formattedEmail+formattedGitHub
+		+formattedTwitter+formattedSkills);
+	var formattedWelcomeMessage = HTMLkeywordWelcomeMessage.replace("%data%", bio.welcomeMessage);
+	var formattedDescription = HTMLkeywordDescription.replace("%data%", bio.description);
 	$("#me-desc").append(formattedWelcomeMessage+formattedDescription);
-}
+};
 
-me.display();
+bio.display();
 
 /****************************** MAP SECTION TAKEN FROM COURSE ********/
 var googleMap = '<div id="map"></div>';
@@ -86,7 +114,7 @@ function initializeMap() {
     var locations = [];
 
     // adds the single location property from bio to the locations array
-    locations.push(me.location);
+    locations.push(bio.contacts.location);
     locations.push(footer.location);
     for (var i=0; i<education.schools.length; i++) {
     	locations.push(education.schools[i].location);
@@ -231,7 +259,7 @@ var education = {
 		  "location" : "Paris",
 		  "degree" : "Master",
 		  "majors" : ["Computer Science", "C++"],
-		  "dates" : "06/12/09",
+		  "dates" : "2005-2009",
 		  "url" : "http://www.universitedeparis.fr/"
 		},
 		{
@@ -239,7 +267,7 @@ var education = {
 		  "location" : "London",
 		  "degree" : "Bachelor",
 		  "majors" : ["Computer Science", "Java", "C++", "Neural Network"],
-		  "dates" : "01/03/05",
+		  "dates" : "1996-2005",
 		  "url" : "http://www.londonuniv.co.uk/"
 		},
 		{
@@ -247,7 +275,7 @@ var education = {
 		  "location" : "Hannover",
 		  "degree" : "High school diploma",
 		  "majors" : ["Math", "Physics"],
-		  "dates" : "04/12/96",
+		  "dates" : "1990-1996",
 		  "url" : "http://www.hannovercollegeschool.de/"
 		},
 		{
@@ -255,7 +283,7 @@ var education = {
 		  "location" : "Hannover",
 		  "degree" : "Primary school diploma",
 		  "majors" : ["Math", "German"],
-		  "dates" : "12/01/90",
+		  "dates" : "1985-1990",
 		  "url" : "http://www.hannoverelementaryschool.de/"
 		}
 	],
@@ -263,23 +291,23 @@ var education = {
 		{
 		  "title" : "Front-End Web Developer Nanodegree",
 		  "school" : "Udacity",
-		  "dates" : "11/23/15",
+		  "date" : "2014-2015",
 		  "url" : "http://www.udacity.com/"
 		},
 		{
 		  "title" : "Android Development for Beginners",
 		  "school" : "Udacity",
-		  "dates" : "01/24/14",
+		  "date" : "2013-2014",
 		  "url" : "http://www.udacity.com/"
 		},
 		{
 		  "title" : "Beginning Game Programming with C#",
 		  "school" : "University of Colorado System, Coursera",
-		  "dates" : "03/04/2013",
+		  "date" : "2012-2013",
 		  "url" : "http://www.coursera.org/"
 		}
 	]
-}
+};
 
 var HTMLeducationTitle = '<h1 id="id-title">%data%</h1>';
 var HTMLschoolStart = '<div class="title-format"><h2>education</h2></div>';
@@ -297,8 +325,8 @@ var HTMLonlineSchool = '<div class="location-format">(%data%)</div>';
 education.display = function() {
 	$(".box-1-1e").append(HTMLeducationTitle.replace("%data%", education.title));
 	$(".box-1-2e").append(HTMLschoolStart);
-	for(school in education.schools) {
-		if(education.schools[school].dates != null) {
+	for(var school in education.schools) {
+		if(education.schools[school].dates !== null) {
 			var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
 			var formattedSchoolName = HTMLschoolName.replace(
 				"%data%", education.schools[school].name).replace("%data2%", education.schools[school].url);
@@ -311,18 +339,18 @@ education.display = function() {
 				$(".box-1-2e").append(formattedSchoolMajors[i]);
 			}
 		}
-	};
+	}
 	$(".box-1-4e").append(HTMLonlineStart);
-	for(course in education.onlineCourses) {
-		if(education.schools[course].dates != null) {
-			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
+	for(var course in education.onlineCourses) {
+		if(education.schools[course].dates !== null) {
+			var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].date);
 			var formattedOnlineName = HTMLschoolName.replace("%data%",
 				education.onlineCourses[course].title).replace("%data2%", education.onlineCourses[course].url);
 			var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
 			$(".box-1-4e").append(formattedOnlineDates + formattedOnlineName + formattedOnlineSchool);
 		}
 	}
-}
+};
 
 education.display();
 
@@ -333,34 +361,34 @@ var work = {
 	"jobs" : [
 		{
 		  "employer" : "ArchLab",
-		  "role" : "Javascript Developer",
+		  "title" : "Javascript Developer",
 		  "location" : "London",
-		  "dates" : "today",
+		  "dates" : "2014- ",
 		  "description" : "Map features for web, using GeoServer and OpenLayers."
 		},
 		{
 		  "employer" : "NewEvolution",
-		  "role" : "Android Developer",
+		  "title" : "Android Developer",
 		  "location" : "Amsterdam",
-		  "dates" : "10/02/2014",
+		  "dates" : "2012-2014",
 		  "description" : "Apps for Android recognizing images using OpenCV."
 		},
 		{
 		  "employer" : "GamesDev",
-		  "role" : "C++ Developer",
+		  "title" : "C++ Developer",
 		  "location" : "Ginevra",
-		  "dates" : "10/04/2012",
+		  "dates" : "2011-2012",
 		  "description" : "A game for Playstation."
 		},
 		{
 		  "employer" : "WebSoft",
-		  "role" : "Java Web Programmer",
+		  "title" : "Java Web Programmer",
 		  "location" : "Rome",
-		  "dates" : "19/03/2011",
+		  "dates" : "2009-2011",
 		  "description" : "Implementing new website for a megastore."
 		}
 	]
-}
+};
 
 var HTMLworkStart = '<h1 id="id-title">%data%</h1>';
 var HTMLworkTitle = '<div class="title-format"><h2>work</h2></div>';
@@ -373,18 +401,18 @@ var HTMLworkDescription = '<div class="description-format">%data%</div>';
 work.display = function() {
 	$(".box-1-1w").append(HTMLworkStart.replace("%data%", work.title));
 	$(".box-1-2w").append(HTMLworkTitle);
-	for(job in work.jobs) {
-		if(work.jobs[job].dates != null) {
+	for(var job in work.jobs) {
+		if(work.jobs[job].dates !== null) {
 			var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
 			var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
 			var formattedLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-			var formattedRole = HTMLworkRole.replace("%data%", work.jobs[job].role);
+			var formattedRole = HTMLworkRole.replace("%data%", work.jobs[job].title);
 			var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
 			$(".box-1-2w").append(formattedDates + formattedEmployer + formattedLocation + formattedRole
 				+  formattedDescription);
 		}
 	}
-}
+};
 
 work.display();
 
@@ -402,7 +430,7 @@ var qualifications = {
 	"8 Adaptive thinker",
 	"9 Skilled in cultivating positive relationships with clients"],
 	"professional" : ["C++","Java","JS","Oracle","Linux","MVC","JavaEE","Android","OpenLayers","C#"]
-}
+};
 
 var HTMLQualificationsTitle = '<h1 id="id-title">%data%</h1>';
 var HTMLpersonalStart = '<div class="title-format"><h2>personal skills</h2></div>';
@@ -419,62 +447,72 @@ qualifications.display = function() {
 	for (var i=0; i<qualifications.personal.length; i++) {
 		formattedElement = HTMLpersonalKey.replace("%data%", qualifications.personal[i]);
 		list.append(formattedElement);
-	};
+	}
 	$(".box-1-4q").append(HTMLprofessionalStart);
 	list = $(".box-1-4q").append('<ul></ul>').find('ul');
 	for (var i=0; i<qualifications.professional.length; i++) {
 		formattedElement = HTMLprofessionalKey.replace("%data%", qualifications.professional[i]);
 		list.append(formattedElement);
-	};
-}
+	}
+};
 
 qualifications.display();
 
 /**************************** projects page *****************************************/
 var projects = {
 	"title" : "Projects & research",
-	"proj" : [
+	"projects" : [
 		{
-		  "name" : "SecureSMS",
+		  "title" : "SecureSMS",
 		  "dates" : "2015",
-		  "description" : "Android app for sending secure messages."
+		  "description" : "Android app for sending secure messages.",
+		  "images" : ["http://www.maxschreck.com/images/sms01.jpg", "http://www.maxschreck.com/images/sms02.jpg"]
 		},
 		{
-		  "name" : "WebMap",
+		  "title" : "WebMap",
 		  "dates" : "2013",
-		  "description" : "A Map integration for web, using GeoServer and OpenLayers."
+		  "description" : "A Map integration for web, using GeoServer and OpenLayers.",
+		  "images" : ["http://www.maxschreck.com/images/web01.jpg", "http://www.maxschreck.com/images/web02.jpg"]
 		},
 		{
-		  "name" : "VisualOpen",
+		  "title" : "VisualOpen",
 		  "dates" : "2011",
-		  "description" : "A mobile application for facial recognition"
+		  "description" : "A mobile application for facial recognition",
+		  "images" : ["http://www.maxschreck.com/images/vo01.jpg", "http://www.maxschreck.com/images/vo02.jpg"]
 		},
 		{
-		  "name" : "A version of Pac Man game",
+		  "title" : "A version of Pac Man game",
 		  "dates" : "2009",
-		  "description" : "New version of Pac Man for Pc and Console."
+		  "description" : "New version of Pac Man for Pc and Console.",
+		  "images" : ["http://www.maxschreck.com/images/pac01.jpg", "http://www.maxschreck.com/images/pac02.jpg"]
 		}
 	]
-}
+};
 
 var HTMLprojectsStart = '<h1 id="id-title">%data%</h1>';
 var HTMLprojectsTitle = '<div class="title-format"><h2>my projects</h2></div>';
+var HTMLprojectsTitle2 = '<div class="title-format"><h2>links</h2></div>';
 var HTMLprojectsName = '<span class="name-format">%data%</span></div>';
 var HTMLprojectsDates = '<div class="name-date-format"><span class="date-format">%data%</span>';
 var HTMLprojectsDescription = '<div class="description-format">%data%</div>';
+var HTMLprojectsImages = '<div class="tag-format">%data%</div>';
 
 projects.display = function() {
 	$(".box-1-1p").append(HTMLprojectsStart.replace("%data%", projects.title));
 	$(".box-1-2p").append(HTMLprojectsTitle);
-	for(p in projects.proj) {
-		if(projects.proj[p].dates != null) {
-			var formattedDates = HTMLprojectsDates.replace("%data%", projects.proj[p].dates);
-			var formattedName = HTMLprojectsName.replace("%data%", projects.proj[p].name);
-			var formattedDescription = HTMLprojectsDescription.replace("%data%", projects.proj[p].description);
+	$(".box-1-4p").append(HTMLprojectsTitle2);
+	for(var proj in projects.projects) {
+		if(projects.projects[proj].dates !== null) {
+			var formattedDates = HTMLprojectsDates.replace("%data%", projects.projects[proj].dates);
+			var formattedName = HTMLprojectsName.replace("%data%", projects.projects[proj].title);
+			var formattedDescription = HTMLprojectsDescription.replace("%data%", projects.projects[proj].description);
 			$(".box-1-2p").append(formattedDates + formattedName + formattedDescription);
+			for(var i=0; i<projects.projects[proj].images.length; i++) {
+				$(".box-1-4p").append(HTMLprojectsImages.replace("%data%", projects.projects[proj].images[i]));
+			}
 		}
 	}
-}
+};
 
 projects.display();
 
@@ -515,7 +553,7 @@ var languages = {
 		  "language3" : ["A1", "Basic user", " ", " ", " ", " "]
 		}
 	]
-}
+};
 
 var HTMLlanguagesTitle = '<h1 id="id-title">%data%</h1>';
 var HTMLlanguagesSubTitle = '<div class="title-format"><h2>%data%</h2></div>';
@@ -572,7 +610,8 @@ languages.display = function() {
 		formattedTDstr = formattedTDstr.concat('</tr>');
 		$(".box-1-4l #tbodyid").append(formattedTDstr);
 	}
-}
+};
+
 languages.display();
 
 /**************************** interests page *****************************************/
@@ -604,7 +643,7 @@ var interests = {
 	"I like playing videogames. I love animals and strategy games like chess. I use to spend a lot time larning technological stuff.",
 	"Member of Monkey Island Society.  Member of Little Deep Red dramatic club. Play piano in prog-rock band.  Particularly keen on classical music. Keen reader of science fiction.  "+
 	"Favourite author is Philip K. Dick. Currently taking an evening Thai cookery course."]
-}
+};
 
 var HTMLinterestsTitle = '<h1 id="id-title">%data%</h1>';
 var HTMLinterestsTableThead = '<div class="contained_table"><table><thead id="theadid"></thead><tbody id="tbodyid">';
@@ -692,7 +731,7 @@ var contact = {
 		  "facebook" : "https://www.facebook.com/maxschreck",
 		  "linkedin" : "https://www.linkedin.com/in/maxschreck"
 		}
-}
+};
 
 var HTMLcontactTitle = '<h1 id="id-title">%data%</h1>';
 var HTMLcontactSubTitle = '<div class="title-format"><h2>%data%</h2></div>';
@@ -707,7 +746,6 @@ var HTMLcontactWeb = '<div class="tag-format"><a href="%data%" id="link"><span c
 var HTMLcontactTwitter = '<div class="tag-format"><a href="%data%" id="link"><span class="zocial-twitter"></span>: </a>%data%</div>';
 var HTMLcontactFacebook = '<div class="tag-format"><a href="%data%" id="link"><span class="zocial-facebook"></span>: </a>%data%</div>';
 var HTMLcontactLinkedin = '<div class="tag-format"><a href="%data%" id="link"><span class="zocial-linkedin"></span>: </a>%data%</div>';
-
 
 contact.display = function() {
 	$(".box-1-1c").append(HTMLcontactTitle.replace("%data%", contact.title));
@@ -728,14 +766,14 @@ contact.display = function() {
 	$(".box-1-3c").append(formattedContactAddress + formattedContactLocation + formattedContactCountry
 		+ formattedContactPhone + formattedContactMobile);
 	$(".box-1-4c").append(HTMLcontactSubTitle.replace("%data%", contact.others.subtitle));
-	formattedContactMobile2 = HTMLcontactMobile2.replace("%data%", contact.others.mobile);
-	formattedContactEmail = HTMLcontactEmail.replace(/%data%/g, contact.others.email);
-	formattedContactWeb = HTMLcontactWeb.replace(/%data%/g, contact.others.website);
-	formattedContactTwitter = HTMLcontactTwitter.replace(/%data%/g, contact.others.twitter);
-	formattedContactFacebook = HTMLcontactFacebook.replace(/%data%/g, contact.others.facebook);
-	formattedContactLinkedin = HTMLcontactLinkedin.replace(/%data%/g, contact.others.linkedin);
+	var formattedContactMobile2 = HTMLcontactMobile2.replace("%data%", contact.others.mobile);
+	var formattedContactEmail = HTMLcontactEmail.replace(/%data%/g, contact.others.email);
+	var formattedContactWeb = HTMLcontactWeb.replace(/%data%/g, contact.others.website);
+	var formattedContactTwitter = HTMLcontactTwitter.replace(/%data%/g, contact.others.twitter);
+	var formattedContactFacebook = HTMLcontactFacebook.replace(/%data%/g, contact.others.facebook);
+	var formattedContactLinkedin = HTMLcontactLinkedin.replace(/%data%/g, contact.others.linkedin);
 	$(".box-1-4c").append(formattedContactMobile2 + formattedContactEmail + formattedContactWeb +
 		formattedContactTwitter + formattedContactFacebook + formattedContactLinkedin);
-}
+};
 
 contact.display();
