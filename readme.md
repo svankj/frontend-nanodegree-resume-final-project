@@ -7,7 +7,7 @@ to change Description section), in Contact page I have used the zocial icons.
 * The structure of Resume is a main page with a header menu which pressing the names Me, Education, Work, Qualifications... changes the section page of Resume loading with a jquery function the right page.
 * The only stuff that it is not mine is the map function taken from the course (I just made a little modification on infoWindow to show an image and a short description text) and the wait function when Me page is selected taken from web.
 * I coded Resume project under Ubuntu 14.04 using Sublime Text and Chromium browser.
-* [CSS validator](jigsaw.w3.org/css-validator/#validate_by_input) passed except for the warning "can't find the warning message for vendor-extension".
-* [Html validator](validator.w3.org/#validate_by_input) for index.html passed except for minor warning.
+* [CSS validator](https://jigsaw.w3.org/css-validator/#validate_by_input) passed except for the warning "can't find the warning message for vendor-extension".
+* [Html validator](https://validator.w3.org/#validate_by_input) for index.html passed except for minor warning.
 
 *PS: Max Schreck It's not me.* ![Image of smile](https://discuss.okfn.org/images/emoji/emoji_one/wink.png?v=0)
