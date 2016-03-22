@@ -684,7 +684,7 @@ interests.display = function() {
 		formattedTDstr += '</tr>';
 		$(".box-1-4i #tbodyid").append(formattedTDstr);
 	}
-}
+};
 
 interests.display();
 
